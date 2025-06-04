@@ -18,4 +18,4 @@
 
 When launched without parameters in:
 1)  OS MS Windows - Can run by **RightMouseClick** and selecting **Run with Powershell**. It attempts to open the file **%APPDATA%\MikroTik\WinBox\Addresses.cdb** (if the file is missing, it displays a "**File Open Dialog**"). The results are shown in a pop-up window.
-2)  OS Linux - it displays help information.
+2)  OS Linux - Displays help information.
