@@ -16,7 +16,7 @@
 -    **-HTML**     - Write output result to html file and open brouser.
 -    **-HTMLPath** - Full path to .html file. If missin
 -    **-CodePage** - Codepage in file.
--    
+    
               Blank: 1) For OS MS Windows - Use default system codepage
      
                      2) For Linux - use **"Windows-1251"**
