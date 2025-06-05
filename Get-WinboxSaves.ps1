@@ -23,6 +23,7 @@
 #     2) OS Linux - it displays help information.
 #    
 #    You may need to set own Codepage
+#    List of Codepages - https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
 
 param (
     [string] $Path,
