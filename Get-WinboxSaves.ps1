@@ -3,25 +3,31 @@
 # Powershell script.
 # Get-WinBoxSaves.ps1
 # For those who "forget" logins. Reads the winbox save database.
-# Outputs logins and passwords from an unencrypted database.
+# Outputs logins and passwords from an unencrypted database. In GUI (OS MS Windows) RightMouseClick copy item to clipboard.
 #
 # Usage 
-# .\Get-WinboxSaves.ps1  [-Help] [-Dialog] [-Path] [-Console] [-HTML] [-HTMLPath]
+# .\Get-WinboxSaves.ps1  [-Help] [-Dialog] [-Path] [-Console] [-HTML] [-HTMLPath] [-CodePage]
 #    -Help     - Show help.
 #    -Dialog   - Only for OS MS Windows. Open "File open dialog" window. 
 #    -Path     - Full path to Winbox save file (usually "Addresses.cdb").
 #    -Console  - Only for OS MS Windows. Output to console. Don't open result window.
 #    -HTML     - Write output result to html file and open brouser.
 #    -HTMLPath - Full path to .html file. If missing set to "ScriptName.html". Path same with script.
+#    -CodePage - Codepage in file. 
+#                Blank: 1) For OS MS Windows - Use default system codepage
+#                       2) For Linux - use **"Windows-1251"**
 #
 #    When launched without parameters in:
 #     1) OS MS Windows - it attempts to open the file %APPDATA%\MikroTik\WinBox\Addresses.cdb (if the file is missing, it displays a "File Open Dialog"). 
 #        The results are shown in a pop-up window.
 #     2) OS Linux - it displays help information.
+#    
+#    You may need to set own Codepage
 
 param (
     [string] $Path,
     [string] $HTMLPath,
+    [string] $CodePage,
     [switch] $Dialog,
     [switch] $Help,
     [switch] $HTML,
@@ -271,7 +277,9 @@ if ( -not (Test-Path -Path $filename) )
             exit 1 }      
   }
 
-#write-host " USe file $filename"
+if (-not $Codepage) { $CodeP = "Windows-1251" } 
+               else { $CodeP = $codepage }
+
 # Addresses.cdb file signature
 $signature = [byte[]](0x0d, 0xf0, 0x1d, 0xc0)
 
@@ -375,7 +383,9 @@ while ($ptr -lt $content.Length) {
                 $value = $content[$ptr..($ptr+$length-1)]
                 $ptr += $length
                 try {
-                    $decoded_value = [System.Text.Encoding]::UTF8.GetString($value)
+
+                if (-not $codepage -and $WinOs) { $decoded_value = [System.Text.Encoding]::default.GetString($value) }
+                 else { $decoded_value = [System.Text.Encoding]::GetEncoding($CodeP).GetString($value) }
                 }
                 catch {
                     $decoded_value = $value -join ','
