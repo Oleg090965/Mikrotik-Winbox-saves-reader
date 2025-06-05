@@ -4,7 +4,7 @@
  
  For those who "forget" logins. Reads the winbox save database.
  
- Outputs logins and passwords from an unencrypted database.
+ Outputs logins and passwords from an unencrypted database. In GUI (OS MS Windows) **RightMouseClick** copy item to clipboard.
 
  Usage 
  
