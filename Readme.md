@@ -18,8 +18,10 @@
 -    **-CodePage** - Codepage in file.   
               Blank: 1) For OS MS Windows - Use default system codepage
                      2) For Linux - use **"Windows-1251"**
-
+     
+List of Codepages - https://learn.microsoft.com/en-us/windows/win32/intl/code-page-identifiers
 
 When launched without parameters in:
 1)  OS MS Windows - Can run by **RightMouseClick** and selecting **Run with Powershell**. It attempts to open the file **%APPDATA%\MikroTik\WinBox\Addresses.cdb** (if the file is missing, it displays a "**File Open Dialog**"). The results are shown in a pop-up window.
 2)  OS Linux - Displays help information.
+
